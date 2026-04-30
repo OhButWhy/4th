@@ -38,7 +38,7 @@ class SensorCam(Sensor):
 
     def get(self):
         ret, img = self.camera.read()
-        if not ret:
+        if not ret or img is None or img.size == 0:
             logging.critical(
                 "Камера перестала выдавать кадры (возможно, отключена)")
             sys.exit(1)
