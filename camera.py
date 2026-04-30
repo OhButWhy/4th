@@ -29,7 +29,7 @@ class SensorX(Sensor):
 
 class SensorCam(Sensor):
     def __init__(self, camera_name, resolution):
-        self.camera = cv2.VideoCapture(camera_name)
+        self.camera = cv2.VideoCapture(camera_name, cv2.CAP_DSHOW)
         if not self.camera.isOpened():
             logging.error(f"Не удалось открыть камеру {camera_name}")
             raise RuntimeError(f"Не удалось открыть камеру {camera_name}")
@@ -176,3 +176,4 @@ if __name__ == "__main__":
         target=mainn, args=(que_cam,  stop, fps))
     main_thread.start()
     main_thread.join()
+    stop.set()
